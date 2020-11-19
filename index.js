@@ -31,7 +31,7 @@ app.get('/proxyimage', (req, res) => {
 });
 
 app.get('/readability', async (req, res) => {
-  const { url } = req.query;
+  const { url, imgProxy = '1' } = req.query;
   const response = await http.get({
       uri: url,
   });
@@ -47,7 +47,7 @@ app.get('/readability', async (req, res) => {
       const $elem = $(this);
       const src = $elem.attr('src');
 
-      if (src && !src.startsWith('data:')) {
+      if (imgProxy == '1' && src && !src.startsWith('data:')) {
           $elem.attr('src', '/proxyimage?url=' + encodeURIComponent(src));
       }
 
