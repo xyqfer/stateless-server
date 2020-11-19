@@ -48,7 +48,7 @@ app.get('/readability', async (req, res) => {
       const src = $elem.attr('src');
 
       if (src && !src.startsWith('data:')) {
-          $elem.attr('src', process.env.IMAGE_PROXY + encodeURIComponent(src));
+          $elem.attr('src', '/proxyimage?url=' + encodeURIComponent(src));
       }
 
       $elem.removeAttr('srcset');
