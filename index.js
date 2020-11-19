@@ -56,6 +56,9 @@ app.get('/readability', async (req, res) => {
       $elem.removeAttr('height');
       $elem.removeAttr('sizes');
   });
+  $('.page').each(function() {
+      $(this).removeAttr('class');
+  });
 
   res.render('archive', {
       title: article.title,
