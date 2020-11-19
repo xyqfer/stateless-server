@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<body>
+    <input type="text" id="J-text1">
+    <br>
+    <button id="J-test1">Test Proxy</button>
+    <br>
+    <br>
+    <input type="text" id="J-text2">
+    <br>
+    <button id="J-test2">Test Reader View</button>
+    
+    <script>
+        const $text1 = document.getElementById('J-text1');
+        const $text2 = document.getElementById('J-text2');
+        const $btn1 = document.getElementById('J-test1');
+        const $btn2 = document.getElementById('J-test2');
+    </script>
+    <script>
+        $btn1.addEventListener('click', () => {
+            window.open('/proxyimage?url=' + encodeURIComponent($text1.value));
+        });
+
+        $btn2.addEventListener('click', () => {
+            window.open('/readability?url=' + encodeURIComponent($text2.value));
+        });
+    </script>
+</body>
+</html>
