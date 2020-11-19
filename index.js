@@ -1,14 +1,23 @@
+const request = require('request');
 const express = require('express');
-
 const app = express();
 
 app.get('/', (req, res) => res.send('Home Page Route'));
+app.get('/proxyimage', (req, res) => {
+  const { url } = req.query;
+  const headers = {};
 
-app.get('/about', (req, res) => res.send(`About Page Route ${req.query.url}`));
+  if (req.headers.range) {
+      headers.Range = req.headers.range;
+  }
 
-app.get('/portfolio', (req, res) => res.send('Portfolio Page Route'));
-
-app.get('/contact', (req, res) => res.send('Contact Page Route'));
+  request
+    .get({
+        url,
+        headers,
+    })
+    .pipe(res);
+});
 
 const port = process.env.PORT || 3000;
 
