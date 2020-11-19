@@ -59,6 +59,9 @@ app.get('/readability', async (req, res) => {
   $('.page').each(function() {
       $(this).removeAttr('class');
   });
+  $('a').each(function() {
+      $(this).addClass('external').attr('target', '_blank');
+  });
 
   res.render('archive', {
       title: article.title,
