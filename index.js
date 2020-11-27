@@ -80,7 +80,7 @@ app.get('/youtube/video/:id', (req, res) => {
   const trackUrl = encodeURIComponent(`https://invidious.xyz/api/v1/captions/${id}?label=English&hl=en-US`);
 
   res.render('video', {
-    src: `https://ibdkopi6vn.avosapps.us/api/v1/youtube/proxy/${id}`,
+    src: `https://v3zvmw0fii.avosapps.us/youtube/proxy/${id}`,
     track: `/proxyimage?url=${trackUrl}`,
   });
 });
