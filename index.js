@@ -73,6 +73,18 @@ app.get('/test', async (req, res) => {
   res.render('test');
 });
 
+app.use('/api', require('./api/index'));
+
+app.get('/youtube/video/:id', (req, res) => {
+  const { id } = req.params;
+  const trackUrl = encodeURIComponent(`https://invidious.xyz/api/v1/captions/${id}?label=English&hl=en-US`);
+
+  res.render('video', {
+    src: `/api/v1/youtube/proxy/${id}`,
+    track: `/proxyimage?url=${trackUrl}`,
+  });
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Server running on ${port}, http://localhost:${port}`));
