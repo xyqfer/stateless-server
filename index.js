@@ -73,7 +73,7 @@ app.get('/test', async (req, res) => {
   res.render('test');
 });
 
-app.use('/api', require('./api/index'));
+app.use('/api/v1', require('./api/v1/index'));
 
 app.get('/youtube/video/:id', (req, res) => {
   const { id } = req.params;
