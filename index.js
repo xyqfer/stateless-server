@@ -1,15 +1,28 @@
 const path = require('path');
 const request = require('request');
-const { Readability } = require('@mozilla/readability');
-const JSDOM = require('jsdom').JSDOM;
-const cheerio = require('cheerio');
-const { http } = require('./app-libs');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const express = require('express');
+
+require('module-alias/register');
+const { http, params, readability } = require('app-libs');
+
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('x-powered-by', false);
+
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
+app.use(cookieParser());
+
+app.use(
+  cors({
+      origin: '*',
+  })
+);
 
 app.use(express.static('public'));
 
@@ -32,40 +45,11 @@ app.get('/proxyimage', (req, res) => {
 
 app.get('/readability', async (req, res) => {
   const { url, imgProxy = '1' } = req.query;
-  const response = await http.get({
-      uri: url,
-  });
-
-  const doc = new JSDOM(response, {
-    url
-  });
-  const reader = new Readability(doc.window.document);
-  const article = reader.parse();
-
-  const $ = cheerio.load(article.content);
-  $('img').each(function() {
-      const $elem = $(this);
-      const src = $elem.attr('src');
-
-      if (imgProxy == '1' && src && !src.startsWith('data:')) {
-          $elem.attr('src', '/proxyimage?url=' + encodeURIComponent(src));
-      }
-
-      $elem.removeAttr('srcset');
-      $elem.removeAttr('width');
-      $elem.removeAttr('height');
-      $elem.removeAttr('sizes');
-  });
-  $('.page').each(function() {
-      $(this).removeAttr('class');
-  });
-  $('a').each(function() {
-      $(this).addClass('external').attr('target', '_blank');
-  });
+  const { title, content } = await readability(url, imgProxy);
 
   res.render('archive', {
-      title: article.title,
-      content: $('body').html(),
+      title,
+      content,
   });
 });
 
@@ -83,6 +67,43 @@ app.get('/youtube/video/:id', (req, res) => {
     src: `https://v3zvmw0fii.avosapps.us/youtube/proxy/${id}`,
     track: `/proxyimage?url=${trackUrl}`,
   });
+});
+
+app.get('/theinitium', async (req, res) => {
+  const { slug } = req.query;
+  const render = 'archive';
+
+  try {
+      const response = await http.get({
+          uri: `https://api.theinitium.com/api/v1/article/detail/?language=zh-hans&slug=${slug}`,
+          json: true,
+          headers: {
+              'User-Agent': params.ua.pc,
+              Authorization: `Basic ${process.env.THEINITIUM_TOKEN}`,
+          },
+      });
+
+      const $ = cheerio.load(response.content);
+      $('img').each(function() {
+          const $elem = $(this);
+          const src = $elem.attr('src');
+
+          if (!src.startsWith('data:')) {
+              $elem.attr('src', '/proxyimage?url=' + encodeURIComponent(src));
+          }
+      });
+
+      res.render(render, {
+          title: response.headline,
+          content: $.html(),
+      });
+  } catch (err) {
+      console.error(err);
+      res.render(render, {
+          title: '',
+          content: '',
+      });
+  }
 });
 
 const port = process.env.PORT || 3000;
