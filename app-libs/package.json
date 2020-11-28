@@ -1,0 +1,9 @@
+{
+  "name": "app-libs",
+  "version": "1.15.2",
+  "description": "项目公用库",
+  "main": "index.js",
+  "scripts": {},
+  "author": "liangliang",
+  "license": "MIT"
+}

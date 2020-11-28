@@ -7,8 +7,8 @@ const express = require('express');
 
 console.log(process.cwd, __dirname);
 
-// require('module-alias/register');
-const { http, params, readability } = require('./app-libs');
+require('module-alias/register');
+const { http, params, readability } = require('app-libs');
 
 const app = express();
 
