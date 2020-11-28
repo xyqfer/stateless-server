@@ -8,7 +8,7 @@ const express = require('express');
 console.log(process.cwd, __dirname);
 
 // require('module-alias/register');
-// const { http, params, readability } = require('app-libs');
+const { http, params, readability } = require('./app-libs');
 
 const app = express();
 
@@ -60,7 +60,7 @@ app.get('/test', (req, res) => {
   res.render('test');
 });
 
-app.use('/api/v1', require('./api/v1/index'));
+// app.use('/api/v1', require('./api/v1/index'));
 
 app.get('/youtube/video/:id', (req, res) => {
   const { id } = req.params;
