@@ -48,4 +48,9 @@ router.get('/v2ex/search', v2exSearch);
 router.get('/v2ex/recent', v2exRecent);
 router.get('/v2ex/checkLogin', v2exCheckLogin);
 
+router.get('/theinitium/article', require('./theinitium/article'));
+router.get('/theinitium/channel/:name', require('./theinitium/channel'));
+
+router.get('/coolapk/feed/:id', require('./coolapk/feed'));
+
 module.exports = router;

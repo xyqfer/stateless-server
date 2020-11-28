@@ -19,7 +19,7 @@ module.exports = async (url, imgProxy = '1') => {
         const src = $elem.attr('src');
 
         if (imgProxy == '1' && src && !src.startsWith('data:')) {
-            $elem.attr('src', '/proxyimage?url=' + encodeURIComponent(src));
+            $elem.attr('src', process.env.IMAGE_PROXY + encodeURIComponent(src));
         }
 
         $elem.removeAttr('srcset');
