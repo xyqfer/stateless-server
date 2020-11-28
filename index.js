@@ -56,7 +56,7 @@ app.get('/readability', async (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  console.log(process.cwd, __dirname);
+  console.log(process.cwd(), __dirname, __filename);
   res.render('test');
 });
 
