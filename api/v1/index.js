@@ -53,4 +53,7 @@ router.get('/theinitium/channel/:name', require('./theinitium/channel'));
 
 router.get('/coolapk/feed/:id', require('./coolapk/feed'));
 
+router.get('/caixin/article', require('./caixin/article'));
+router.get('/caixin/magazine', require('./caixin/magazine'));
+
 module.exports = router;
