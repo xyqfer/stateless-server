@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
 
+console.log(process.cwd, __dirname);
+
 require('module-alias/register');
 const { http, params, readability } = require('app-libs');
 
