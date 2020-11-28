@@ -1,4 +1,4 @@
-const { crawler } = require('app-libs');
+const { crawler } = require(`${process.cwd()}/app-libs`);
 
 module.exports = async (req, res) => {
     const startYear = 2011;

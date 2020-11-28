@@ -1,7 +1,7 @@
 const rp = require('request-promise').defaults({
   jar: true,
 });
-const { params } = require('app-libs');
+const { params } = require(`${process.cwd()}/app-libs`);
 
 module.exports = (req, res) => {
     const { cookie, once, key0, key1, key2, value0, value1, value2 } = req.body;

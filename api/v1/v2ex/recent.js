@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const cheerio = require('cheerio');
 const url = require('url');
-const { params } = require('app-libs');
+const { params } = require(`${process.cwd()}/app-libs`);
 
 module.exports = (req, res) => {
     const { p = 1 } = req.query;

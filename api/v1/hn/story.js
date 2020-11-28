@@ -1,5 +1,5 @@
 const moment = require('moment');
-const { http } = require('app-libs');
+const { http } = require(`${process.cwd()}/app-libs`);
 
 module.exports = async (req, res) => {
     const { page = 1 } = req.query;

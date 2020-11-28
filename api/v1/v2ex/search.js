@@ -3,7 +3,7 @@ const rp = require('request-promise').defaults({
     jar: true,
 });
 const cheerio = require('cheerio');
-const { params } = require('app-libs');
+const { params } = require(`${process.cwd()}/app-libs`);
 
 module.exports = async (req, res) => {
     const { q = '', p = 1 } = req.query;

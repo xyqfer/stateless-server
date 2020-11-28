@@ -1,4 +1,4 @@
-const { http, crawler, readability } = require('app-libs');
+const { http, crawler, readability } = require(`${process.cwd()}/app-libs`);
 
 module.exports = async (req, res) => {
     const { id, all = false } = req.query;

@@ -1,6 +1,6 @@
 const rp = require('request-promise');
 const cheerio = require('cheerio');
-const { params } = require('app-libs');
+const { params } = require(`${process.cwd()}/app-libs`);
 
 module.exports = (req, res) => {
     const cookie = `A2=${req.cookies.A2 || ''}`;

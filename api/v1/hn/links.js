@@ -1,6 +1,6 @@
 const cheerio = require('cheerio');
 const _ = require('lodash');
-const { http } = require('app-libs');
+const { http } = require(`${process.cwd()}/app-libs`);
 
 const getChild = (data, res) => {
     if (!data.children || data.children.length === 0) return;

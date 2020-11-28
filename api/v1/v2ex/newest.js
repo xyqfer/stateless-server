@@ -1,5 +1,5 @@
 const rp = require('request-promise');
-const { params } = require('app-libs');
+const { params } = require(`${process.cwd()}/app-libs`);
 const parsePage = require('./utils/parseHomePage');
 
 module.exports = (req, res) => {

@@ -1,5 +1,5 @@
 const url = require('url');
-const { crawler } = require('app-libs');
+const { crawler } = require(`${process.cwd()}/app-libs`);
 
 module.exports = async (req, res) => {
     const { page = 1 } = req.query;

@@ -1,6 +1,6 @@
 const url = require('url');
 const moment = require('moment');
-const { crawler } = require('app-libs');
+const { crawler } = require(`${process.cwd()}/app-libs`);
 
 module.exports = async (req, res) => {
     function randomDate(start, end) {
