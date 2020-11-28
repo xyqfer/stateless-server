@@ -5,10 +5,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
 
-console.log(process.cwd, __dirname);
-
-require('module-alias/register');
-const { http, params, readability } = require('app-libs');
+const { http, params, readability } = require(`${process.cwd()}/app-libs`);
 
 const app = express();
 
@@ -56,7 +53,6 @@ app.get('/readability', async (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  console.log(process.cwd(), __dirname, __filename);
   res.render('test');
 });
 
