@@ -70,12 +70,6 @@ app.get('/youtube/video/:id', (req, res) => {
   });
 });
 
-app.get('/timeout', (req, res) => {
-  setTimeout(() => {
-    res.send('timeout');
-  }, 20 * 1000);
-});
-
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Server running on ${port}, http://localhost:${port}`));
