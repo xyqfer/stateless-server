@@ -45,8 +45,8 @@ module.exports = (req, res) => {
 
   content += `
     <br>
-    <br>
     <a href="./showHistory?page=${page + 1}">Next</a>
+    <br>
   `;
 
   res.render('archive', {
