@@ -17,7 +17,7 @@ function getFallbackUrl(url) {
 module.exports = (req, res) => {
   const page = parseInt(req.query.page);
   const count = 10;
-  const data = require(`${process.cwd()}/allProjects.json`);
+  const data = require(`${process.cwd()}/all_projects.json`);
   let content = ''; 
 
   for (let i = (page - 1) * count * 2; i < (page * count * 2); i += 2) {
