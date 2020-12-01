@@ -58,4 +58,6 @@ router.get('/coolapk/feed/:id', require('./coolapk/feed'));
 router.get('/caixin/article', require('./caixin/article'));
 router.get('/caixin/magazine', require('./caixin/magazine'));
 
+router.get('/infoq/article', require('./infoq/article'));
+
 module.exports = router;
