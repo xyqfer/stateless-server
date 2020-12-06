@@ -53,7 +53,9 @@ app.get('/readability', async (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  res.render('test');
+  res.render('test', {
+    token: process.env.IPAD_PUSH_TOKEN,
+  });
 });
 
 app.use('/api/v1', require('./api/v1/index'));
