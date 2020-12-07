@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
 
-const { http, params, readability } = require(`${process.cwd()}/app-libs`);
+const { http, params, readability, params } = require(`${process.cwd()}/app-libs`);
 
 const app = express();
 
@@ -27,11 +27,15 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => res.send('Home Page'));
 app.get('/proxyimage', (req, res) => {
-  const { url } = req.query;
+  const { url, m } = req.query;
   const headers = {};
 
   if (req.headers.range) {
       headers.Range = req.headers.range;
+  }
+
+  if (m) {
+    headers['user-agent'] = params.ua.mobile;
   }
 
   request
