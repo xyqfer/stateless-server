@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
 
-const { http, params, readability, params } = require(`${process.cwd()}/app-libs`);
+const { params, readability } = require(`${process.cwd()}/app-libs`);
 
 const app = express();
 
