@@ -68,8 +68,8 @@
         <%-content%>
     </div>
 
-    <link rel="stylesheet" href="<%=cdnHost%>/prism/prism.css">
-    <script src="<%=cdnHost%>/prism/prism.js"></script>
-    <script>document.querySelectorAll('pre').forEach(item => Prism.highlightElement(item));</script>
+    <link rel="stylesheet" href="<%=cdnHost%>/highlight.js/highlight.min.css">
+    <script src="<%=cdnHost%>/highlight.js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
