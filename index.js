@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
+const AV = require('leancloud-storage');
 
 const { params, readability } = require(`${process.cwd()}/app-libs`);
 
@@ -75,6 +76,25 @@ app.get('/youtube/video/:id', (req, res) => {
     src: `https://v3zvmw0fii.avosapps.us/youtube/proxy/${id}`,
     track1: `/proxyimage?url=${trackUrl1}`,
     track2: `/proxyimage?url=${trackUrl2}`,
+  });
+});
+
+app.get('/archive', (req, res) => {
+  const { id } = req.query;
+
+  AV.init({
+    appId: process.env.DB_APP_ID,
+    appKey: process.env.DB_APP_KEY,
+  });
+
+  const query = new AV.Query('Archive');
+  query.equalTo('uuid', id);
+  query.find().then((items) => {
+    const { title = '', content = '' } = items[0].toJSON();
+    res.render('archive2', {
+      title,
+      content,
+    });
   });
 });
 
