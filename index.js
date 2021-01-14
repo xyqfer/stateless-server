@@ -4,7 +4,6 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
-const AV = require('leancloud-storage');
 
 const { params, readability } = require(`${process.cwd()}/app-libs`);
 
@@ -80,6 +79,7 @@ app.get('/youtube/video/:id', (req, res) => {
 });
 
 app.get('/archive', (req, res) => {
+  const AV = require('leancloud-storage');
   const { id } = req.query;
 
   AV.init({
@@ -95,6 +95,21 @@ app.get('/archive', (req, res) => {
       title,
       content,
     });
+  });
+});
+
+app.get('/archive2', async (req, res) => {
+  const { http } = require(`${process.cwd()}/app-libs`);
+  const { id } = req.query;
+
+  const data = await http.get({
+    json: true,
+    uri: `${process.env.CACHE_URL}${id}`,
+  });
+  const { title = '', content = '' } = data;
+  res.render('archive2', {
+    title,
+    content,
   });
 });
 
