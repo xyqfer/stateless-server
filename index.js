@@ -113,6 +113,16 @@ app.get('/archive2', async (req, res) => {
   });
 });
 
+app.get('/ituring-book', async (req, res) => {
+  const url = `https://www.ituring.com.cn/book/${req.query.id}`;
+  let html = await http.get({
+    uri: url
+  });
+  html = html.replace(/<meta charset="utf-8">/, '$&<base href="https://www.ituring.com.cn">');
+
+  res.send(html);
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Server running on ${port}, http://localhost:${port}`));
