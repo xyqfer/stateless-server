@@ -114,6 +114,7 @@ app.get('/archive2', async (req, res) => {
 });
 
 app.get('/ituring-book', async (req, res) => {
+  const { http } = require(`${process.cwd()}/app-libs`);
   const url = `https://www.ituring.com.cn/book/${req.query.id}`;
   let html = await http.get({
     uri: url
