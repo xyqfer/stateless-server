@@ -10,6 +10,17 @@ module.exports = async (url, imgProxy = '1') => {
     const doc = new JSDOM(response, {
       url
     });
+
+    const urlObj = new URL(url);
+
+    if (urlObj.host === 'www.wired.com') {
+      Array.from(doc.window.document.querySelectorAll('noscript')).forEach((item) => {
+        const div = doc.window.document.createElement('div');
+        div.innerHTML = item.innerHTML;
+        item.insertAdjacentElement('afterend', div);
+      });
+    }
+
     const reader = new Readability(doc.window.document);
     const article = reader.parse();
 
