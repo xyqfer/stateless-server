@@ -60,4 +60,6 @@ router.get('/caixin/magazine', require('./caixin/magazine'));
 
 router.get('/infoq/article', require('./infoq/article'));
 
+router.get('/screenshot', require('./screenshot'));
+
 module.exports = router;
