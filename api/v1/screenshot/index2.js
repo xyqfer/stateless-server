@@ -1,7 +1,7 @@
 const request = require('request');
 const rp = require('request-promise');
 
-module.exports = async (req, res) => {
+module.exports = async (req, resp) => {
   const { url, width = 375, height = 2000 } = req.query;
   const res = await rp.post({
     uri: 'https://cp82i7sfi4.execute-api.us-east-1.amazonaws.com/prod/capture',
@@ -25,9 +25,9 @@ module.exports = async (req, res) => {
 
     request.get({
       url,
-    }).pipe(res);
+    }).pipe(resp);
   } else {
-    res.json({
+    resp.json({
       success: false,
     });
   }
