@@ -63,4 +63,6 @@ router.get('/infoq/article', require('./infoq/article'));
 router.get('/screenshot', require('./screenshot'));
 router.get('/screenshot2', require('./screenshot/index2'));
 
+router.get('/qiita/proxy', require('./qiita/proxy'));
+
 module.exports = router;
