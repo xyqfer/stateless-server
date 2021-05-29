@@ -69,11 +69,10 @@ app.use('/api/v1', require('./api/v1/index'));
 
 app.get('/youtube/video/:id', (req, res) => {
   const { id } = req.params;
-  const trackUrl = encodeURIComponent(`https://invidious.kavin.rocks/api/v1/captions/${id}?lang=en&tlang=zh-Hans&label=Chinese`);
 
   res.render('video', {
-    src: `https://v3zvmw0fii.avosapps.us/youtube/proxy/${id}`,
-    track: `/proxyimage?url=${trackUrl}`,
+    src: `https://invidious.kavin.rocks/latest_version?id=${id}&itag=22&local=true`,
+    track: `https://invidious.kavin.rocks/api/v1/captions/${id}?lang=en&tlang=zh-Hans&label=Chinese`,
   });
 });
 
