@@ -6,11 +6,6 @@
     <title>test</title>
 </head>
 <body>
-    <input type="text" id="J-text3">
-    <br>
-    <button id="J-test3">Push to iPad</button>
-    <br>
-    <br>
     <input type="text" id="J-text1">
     <br>
     <button id="J-test1">Test Proxy</button>
@@ -35,11 +30,6 @@
 
         $btn2.addEventListener('click', () => {
             window.open('/readability?url=' + encodeURIComponent($text2.value));
-        });
-
-        $btn3.addEventListener('click', () => {
-            const token = '<%=token%>';
-            fetch(`https://api.day.app/${token}/${encodeURIComponent($text3.value)}`);
         });
     </script>
 </body>

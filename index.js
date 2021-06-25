@@ -61,7 +61,7 @@ app.get('/readability', async (req, res) => {
 
 app.get('/test', (req, res) => {
   res.render('test', {
-    token: process.env.IPAD_PUSH_TOKEN,
+  
   });
 });
 
