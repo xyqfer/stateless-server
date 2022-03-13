@@ -30,6 +30,7 @@ module.exports = async (req, res) => {
             'X-App-Token': utils.getCoolapkAppToken(),
         },
     });
+    console.log(data);
     const content = parseContentFromRaw(JSON.parse(data.message_raw_output));
 
     res.render('archive', {
