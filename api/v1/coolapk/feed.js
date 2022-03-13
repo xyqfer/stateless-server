@@ -38,8 +38,8 @@ module.exports = async (req, res) => {
 
     let content = ''
     let title = ''
-    if (data.message_raw_output) {
-        title = data.title
+    if (data.message_raw_output !== 'null') {
+        title = data.title;
         content = parseContentFromRaw(JSON.parse(data.message_raw_output));
     } else {
         const res = await http.get(`https://api.coolapk.com/v6/feed/detail?id=${id}`, config);
