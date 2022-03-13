@@ -14,8 +14,19 @@ const parseContentFromRaw = (raw) =>
         }
     }).join('');
 
-const parseMsg = (msg) => {
-    return msg.split('\n').join('<br>');
+const parseMsg = (msg, pics = []) => {
+    let content = msg.split('\n').join('<br>');
+
+    content += pics.reduce((acc, pic) => {
+        const url = pic.replace('http:', 'https:');
+        acc += `
+            <div class="img-container" style="text-align: center;">
+                <img referrerpolicy="no-referrer" src="${url}">
+            </div>`;
+        return acc
+    }, '')
+
+    return content;
 }
 
 module.exports = async (req, res) => {
@@ -45,7 +56,7 @@ module.exports = async (req, res) => {
     } catch(err) {
         const res = await http.get(`https://api.coolapk.com/v6/feed/detail?id=${id}`, config);
         title = res.data.title;
-        content = parseMsg(res.data.message);
+        content = parseMsg(res.data.message, res.data.picArr);
     }
 
     res.render('archive', {
