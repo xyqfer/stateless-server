@@ -7,7 +7,7 @@ const parseContentFromRaw = (raw) =>
             return `<p>${i.message.split('\n').join('<br>')}</p>`;
         } else if (i.type === 'image') {
             return `<div class="img-container" style="text-align: center;">
-                <img referrerpolicy="no-referrer" src="${i.url}">
+                <img referrerpolicy="no-referrer" src="${i.url.replace('http:', 'https:')}">
                 <p class="image-caption" style="text-align: center;">${i.description}</p></div>`;
         } else {
             return '';
