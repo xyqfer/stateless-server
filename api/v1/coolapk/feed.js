@@ -34,14 +34,15 @@ module.exports = async (req, res) => {
             'X-App-Token': utils.getCoolapkAppToken(),
         },
     };
-    const { data } = await http.get(`https://www.coolapk.com/feed/${id}`, config);
-
     let content = ''
     let title = ''
-    if (data.message_raw_output !== 'null') {
+    
+
+    try {
+        const { data } = await http.get(`https://www.coolapk.com/feed/${id}`, config);
         title = data.title;
         content = parseContentFromRaw(JSON.parse(data.message_raw_output));
-    } else {
+    } catch(err) {
         const res = await http.get(`https://api.coolapk.com/v6/feed/detail?id=${id}`, config);
         title = res.data.title;
         content = parseMsg(res.data.message);
