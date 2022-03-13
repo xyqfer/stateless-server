@@ -14,9 +14,13 @@ const parseContentFromRaw = (raw) =>
         }
     }).join('');
 
+const parseMsg = (msg) => {
+    return msg.split('\n').join('<br>');
+}
+
 module.exports = async (req, res) => {
     const { id } = req.params;
-    const { data } = await http.get(`https://www.coolapk.com/feed/${id}`, {
+    const config = {
         json: true,
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
@@ -29,12 +33,22 @@ module.exports = async (req, res) => {
             'X-App-Device': utils.getCoolapkDeviceToken(),
             'X-App-Token': utils.getCoolapkAppToken(),
         },
-    });
-    console.log(data);
-    const content = parseContentFromRaw(JSON.parse(data.message_raw_output));
+    };
+    const { data } = await http.get(`https://www.coolapk.com/feed/${id}`, config);
+
+    let content = ''
+    let title = ''
+    if (data.message_raw_output) {
+        title = data.title
+        content = parseContentFromRaw(JSON.parse(data.message_raw_output));
+    } else {
+        const res = await http.get(`https://api.coolapk.com/v6/feed/detail?id=${id}`, config);
+        title = res.data.data.title;
+        content = parseMsg(res.data.message);
+    }
 
     res.render('archive', {
-        title: data.title,
+        title,
         content,
     });
 };
